@@ -55,23 +55,22 @@ export class MyApp {
           this.nav.setRoot(this.accessPage);          
         }
       });  
-    platform.ready().then(() => {
+    this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       //statusBar.styleDefault();
       //splashScreen.hide();
+      this.platform.pause.subscribe(() => {        
+          this.authService.logout();
+      });  
+      this.platform.resume.subscribe(() => {      
+          console.log('****UserdashboardPage RESUMED****');
+      });
     
     });
     
   }
 
-  ionViewWillEnter() {
-    this.resumeListener = this.platform.pause.subscribe( this.authService.logout());
-  }
-
-  ionViewWillLeave() {
-    this.resumeListener.unsubscribe();
-  }
    onLoad(page: any) {
     this.nav.setRoot(page);
     this.menuCtrl.close();
