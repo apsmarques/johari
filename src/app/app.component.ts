@@ -29,7 +29,7 @@ export class MyApp {
   faqPage = FaqPage;
   surveyPage = SurveyPage;
   graphicPage = GraphicPage;
-  
+  isAuthenticated = false;
   resumeListener: Subscription = new Subscription();
 
  @ViewChild('nav') nav: NavController;
@@ -47,7 +47,13 @@ export class MyApp {
       })
 
     firebase.auth().onAuthStateChanged(user => {
-          this.nav.setRoot(this.accessPage);                  
+        if (user) {
+          this.isAuthenticated = true;          
+          this.nav.push(this.descriptionPage);          
+        } else {
+          this.isAuthenticated = false;          
+          this.nav.setRoot(this.accessPage);          
+        }
       });  
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -55,7 +61,7 @@ export class MyApp {
       //statusBar.styleDefault();
       //splashScreen.hide();
       this.platform.pause.subscribe(() => {        
-          this.authService.logout();
+          this.authService.logout()
       });  
       this.platform.resume.subscribe(() => {      
           console.log('****UserdashboardPage RESUMED****');
