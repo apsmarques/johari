@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { Platform, NavController, MenuController,AlertController } from 'ionic-angular';
+import { Platform, NavController, MenuController } from 'ionic-angular';
 
 import { AuthService } from "../services/auth";
 import firebase from 'firebase';
@@ -36,7 +36,6 @@ export class MyApp {
 
   constructor(private platform: Platform,
               private menuCtrl: MenuController,
-              private alertCtrl: AlertController,
               private authService: AuthService) {
     firebase.initializeApp({ 
         apiKey: "AIzaSyA64Rp7oJLe3okXnFS7fvPDgZvm1CDkot0",
@@ -62,15 +61,10 @@ export class MyApp {
       //statusBar.styleDefault();
       //splashScreen.hide();
       this.platform.pause.subscribe(() => {        
-           const alert = this.alertCtrl.create({
-                    title: 'Pause!',
-                    message:  'Aplicativo pause',
-                    buttons: ['Ok']
-                  });
-                  alert.present();
+          this.authService.logout();
       });  
       this.platform.resume.subscribe(() => {      
-          console.log('****UserdashboardPage RESUMED****');
+          this.authService.logout();
       });
     
     });

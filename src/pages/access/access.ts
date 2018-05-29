@@ -3,7 +3,7 @@ import { NgForm } from "@angular/forms";
 import { IonicPage, LoadingController, AlertController } from 'ionic-angular';
 import { AuthService } from "../../services/auth";
 import { UserService } from "../../services/user";
-
+import { UserInfo } from "../../models/userInfo";
 
 @IonicPage()
 @Component({
@@ -27,11 +27,32 @@ export class AccessPage {
     loading.present();
     //forçar uma autenticação sempre com a mesma senha para todos. Se já existir o email, ele tenta logar.
     //Se for primeira vez, loga em seguida
+    
     this.authService.signup(form.value.email, '123456')
       .then(data => {
         this.authService.signin(form.value.email, '123456')
                 .then(data => {
                   loading.dismiss();
+                  this.usrServ.setaDadosUsuario(new UserInfo(form.value.nome,form.value.fone,form.value.email,form.value.empresa));
+                  this.authService.getActiveUser().getToken()
+                  .then(
+                    (token: string) => {
+                      this.usrServ.incluiDados(token)
+                        .subscribe(
+                          () => loading.dismiss(),
+                          error => {
+                            loading.dismiss();
+                            const alert = this.alertCtrl.create({
+                            title: 'Erro!',
+                            message:  'Ocorreu um erro inesperado, tente novamente mais tarde.',
+                            buttons: ['Ok']
+                          });
+                          alert.present();
+                          }
+                        );
+                    }
+                  );
+                  
                 })
                 .catch(error => {
                   loading.dismiss();
@@ -49,6 +70,22 @@ export class AccessPage {
             this.authService.signin(form.value.email, '123456')
                 .then(data => {
                   loading.dismiss();
+                  this.authService.getActiveUser().getToken()
+                  .then(
+                    (token: string) => {
+                      this.usrServ.incluiDados(token)
+                        .subscribe(
+                          () => loading.dismiss(),
+                          error => {
+                            loading.dismiss();
+                            const alert = this.alertCtrl.create({
+                            title: 'Erro!',
+                            message:  'Ocorreu um erro inesperado, tente novamente mais tarde.',
+                            buttons: ['Ok']
+                          }
+                        );
+                    }
+                  );
                 })
                 .catch(error => {
                   loading.dismiss();

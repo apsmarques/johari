@@ -8,9 +8,13 @@ import { Injectable } from "@angular/core";
 
 @Injectable()
 export class UserService {
-  private user: UserInfo[] = [];
+  private user: UserInfo;
 
   constructor(private http: Http, private authService: AuthService) {
+  }
+
+  setaDadosUsuario(dados: UserInfo){
+      this.user = { ...dados };
   }
 
   incluiDados(token: string) {
