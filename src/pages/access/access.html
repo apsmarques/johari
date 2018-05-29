@@ -1,0 +1,53 @@
+<ion-header>
+
+  <ion-navbar hideBackButton >
+    <ion-title text-center>Acesso</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+
+<ion-content padding>
+  <form #f="ngForm" (ngSubmit)="onAccess(f)">
+    <ion-list>
+      <ion-item>
+        <ion-label fixed>Nome</ion-label>
+        <ion-input
+          type="nome"
+          ngModel
+          name="nome"
+          required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label fixed>Fone</ion-label>
+        
+        <ion-input
+          type="tel" 
+           
+          mask="(**) *****-****" 
+          [(ngModel)]="fone"
+          name="fone"
+          placeholder="(99)99999-9999"
+          required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label fixed>Email</ion-label>
+        <ion-input
+          type="email"
+          ngModel
+          name="email"
+          required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label fixed>Empresa</ion-label>
+        <ion-input
+          type="empresa"
+          ngModel
+          name="empresa"
+          required></ion-input>
+      </ion-item>
+    </ion-list>
+    <button ion-button block type="submit" [disabled]="!f.valid">Iniciar</button>    
+  </form>
+</ion-content>
