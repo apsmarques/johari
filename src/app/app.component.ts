@@ -29,7 +29,7 @@ export class MyApp {
   faqPage = FaqPage;
   surveyPage = SurveyPage;
   graphicPage = GraphicPage;
-  isAuthenticated = false;
+  
   resumeListener: Subscription = new Subscription();
 
  @ViewChild('nav') nav: NavController;
@@ -47,13 +47,7 @@ export class MyApp {
       })
 
     firebase.auth().onAuthStateChanged(user => {
-        if (user) {
-          this.isAuthenticated = true;          
-          this.nav.setRoot(this.descriptionPage);          
-        } else {
-          this.isAuthenticated = false;          
-          this.nav.setRoot(this.accessPage);          
-        }
+          this.nav.setRoot(this.accessPage);                  
       });  
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
