@@ -1,6 +1,6 @@
 {
   "name": "johari",
-  "app_id": "",
+  "app_id": "e134b3bf",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}
