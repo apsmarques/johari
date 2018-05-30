@@ -14,13 +14,15 @@ export class UserService {
   }
 
   setaDadosUsuario(dados: UserInfo){
+    console.log('dados:'+JSON.stringify(dados));
       this.user = { ...dados };
   }
 
   incluiDados(token: string) {
     const userId = this.authService.getActiveUser().uid;
+    
     return this.http
-      .put('https://johar-cee37.firebaseio.com' + userId + '/userInfo.json?auth=' + token, this.user)
+      .put('https://johar-cee37.firebaseio.com/' + userId + '/userInfo.json?auth=' + token, this.user)
       .map((response: Response) => {
         return response.json();
       });

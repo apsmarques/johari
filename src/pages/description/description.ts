@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController} from 'ionic-angular';
+import { AboutPage } from '../about/about';
+import { FaqPage } from '../faq/faq';
+import { SurveyPage } from '../survey/survey';
+import { GraphicPage } from '../graphic/graphic';
+import { AuthService } from "../../services/auth";
 
-/**
- * Generated class for the DescriptionPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage()
 @Component({
@@ -14,12 +13,18 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'description.html',
 })
 export class DescriptionPage {
+  aboutPage = AboutPage;
+  faqPage = FaqPage;
+  surveyPage = SurveyPage;
+  graphicPage = GraphicPage;
+  
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController,private authService: AuthService) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad DescriptionPage');
+  onLoad(page: any) {
+    this.navCtrl.push(page);
+    this.authService.logout();;
   }
 
 }

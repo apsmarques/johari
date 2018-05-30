@@ -16,7 +16,7 @@
         <ion-input
           type="nome"
           ngModel
-          name="nome"
+          name="nome"          
           required></ion-input>
       </ion-item>
       <ion-item>
@@ -28,6 +28,8 @@
           mask="(**) *****-****" 
           [(ngModel)]="fone"
           name="fone"
+          maxlength="15"
+          minlength="15"
           placeholder="(99)99999-9999"
           required></ion-input>
       </ion-item>

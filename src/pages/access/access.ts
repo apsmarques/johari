@@ -27,21 +27,20 @@ export class AccessPage {
     loading.present();
     //forçar uma autenticação sempre com a mesma senha para todos. Se já existir o email, ele tenta logar.
     //Se for primeira vez, loga em seguida
-    
+    const usr = new UserInfo(form.value.nome,form.value.fone,form.value.email,form.value.empresa);    
     this.authService.signup(form.value.email, '123456')
       .then(data => {
         this.authService.signin(form.value.email, '123456')
-                .then(data => {
-                  loading.dismiss();
-                  this.usrServ.setaDadosUsuario(new UserInfo(form.value.nome,form.value.fone,form.value.email,form.value.empresa));
+                .then(data => {   
+                  this.usrServ.setaDadosUsuario(usr);
                   this.authService.getActiveUser().getToken()
                   .then(
                     (token: string) => {
+                      
                       this.usrServ.incluiDados(token)
                         .subscribe(
                           () => loading.dismiss(),
                           error => {
-                            loading.dismiss();
                             const alert = this.alertCtrl.create({
                             title: 'Erro!',
                             message:  'Ocorreu um erro inesperado, tente novamente mais tarde.',
@@ -55,8 +54,8 @@ export class AccessPage {
                   
                 })
                 .catch(error => {
-                  loading.dismiss();
-                  console.log(error);
+                  
+                  
                   const alert = this.alertCtrl.create({
                     title: 'Falha no login!',
                     message:  this.authService.msgErro(error.code),
@@ -69,7 +68,7 @@ export class AccessPage {
         if (error.code=="auth/email-already-in-use"){
             this.authService.signin(form.value.email, '123456')
                 .then(data => {
-                  loading.dismiss();
+                  this.usrServ.setaDadosUsuario(usr);
                   this.authService.getActiveUser().getToken()
                   .then(
                     (token: string) => {
@@ -77,11 +76,13 @@ export class AccessPage {
                         .subscribe(
                           () => loading.dismiss(),
                           error => {
-                            loading.dismiss();
+                            
                             const alert = this.alertCtrl.create({
-                            title: 'Erro!',
-                            message:  'Ocorreu um erro inesperado, tente novamente mais tarde.',
-                            buttons: ['Ok']
+                              title: 'Erro!',
+                              message:  'Ocorreu um erro inesperado, tente novamente mais tarde.',
+                              buttons: ['Ok']
+                            });  
+                            alert.present();
                           }
                         );
                     }
@@ -89,7 +90,7 @@ export class AccessPage {
                 })
                 .catch(error => {
                   loading.dismiss();
-                  console.log(error);
+                  
                   const alert = this.alertCtrl.create({
                     title: 'Falha no login!',
                     message:  this.authService.msgErro(error.code),
@@ -97,9 +98,17 @@ export class AccessPage {
                   });
                   alert.present();
                 });
-        } else {
+        } else if (error.code=="auth/invalid-email"){
           loading.dismiss();
-          console.log(error);
+          const alert = this.alertCtrl.create({
+                              title: 'Formato de email inválido.',
+                              message:  'O email informado não possui um formato válido, verifique.',
+                              buttons: ['Ok']
+                            });  
+                            alert.present();
+        }else {
+          loading.dismiss();
+          
           const alert = this.alertCtrl.create({
             title: 'Ocorreu um erro!',
             message: 'Desculpe, ocorreu um erro desconhecido no aplicativo, tente novamente mais tarde.',

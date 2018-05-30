@@ -13,6 +13,7 @@ export class AuthService{
     }
 
     getActiveUser() {
+        console.log('getActiveUser');
         return firebase.auth().currentUser;
     }
 

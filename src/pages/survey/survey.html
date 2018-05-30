@@ -7,12 +7,29 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>survey</ion-title>
+    <ion-title text-center>Questionário</ion-title>
   </ion-navbar>
 
 </ion-header>
 
-
 <ion-content padding>
-
+  <ion-card *ngFor="let quest of quests; let i = index">
+    <ion-card-header text-wrap>
+      #{{ i + 1 }}
+      {{ quest.Titulo }}      
+    </ion-card-header>
+    <ion-card-content>
+        <ion-row *ngFor="let sub of quest.subQuest">
+            {{ sub.Titulo }}
+            <hr>
+            <ion-col>
+            <ion-range min="0" max="5" step="1"  [(ngModel)]="sub.valor">
+               <ion-label range-left>0</ion-label>
+              <ion-label range-right>{{ sub.valor}}</ion-label>
+            </ion-range>
+            </ion-col>
+        </ion-row>
+    </ion-card-content>
+    
+  </ion-card>
 </ion-content>
