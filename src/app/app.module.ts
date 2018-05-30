@@ -14,7 +14,7 @@ import { SurveyPage } from '../pages/survey/survey';
 import { GraphicPage } from '../pages/graphic/graphic';
 import { UserService } from "../services/user";
 import { AuthService } from "../services/auth";
-
+import { QuestsService } from "../services/quests";
 
 
 @NgModule({
@@ -48,6 +48,7 @@ import { AuthService } from "../services/auth";
     SplashScreen,
     UserService,
     AuthService,
+    QuestsService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

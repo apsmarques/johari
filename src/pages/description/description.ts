@@ -5,7 +5,7 @@ import { FaqPage } from '../faq/faq';
 import { SurveyPage } from '../survey/survey';
 import { GraphicPage } from '../graphic/graphic';
 import { AuthService } from "../../services/auth";
-
+import { QuestsService } from '../../services/quests';
 
 @IonicPage()
 @Component({
@@ -19,7 +19,13 @@ export class DescriptionPage {
   graphicPage = GraphicPage;
   
 
-  constructor(public navCtrl: NavController,private authService: AuthService) {
+  constructor(public navCtrl: NavController,public questSrv:QuestsService,private authService: AuthService) {
+    this.authService.getActiveUser().getToken()
+                  .then(
+                    (token: string) => {
+                      this.questSrv.getDados(token)
+                        .subscribe(data=>console.log(data));                        
+                    })
   }
 
   onLoad(page: any) {
