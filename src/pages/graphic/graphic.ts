@@ -33,7 +33,7 @@ export class GraphicPage {
   {
      this._CONTEXT = this._CANVAS.getContext('2d');
      this._CONTEXT.fillStyle = "#ffffff";
-     this._CONTEXT.fillRect(0, 0, this.platform.width(), this.platform.height());
+     this._CONTEXT.fillRect(0, 0, this._CANVAS.width, this._CANVAS.height);
   }
 
   drawLine(x:number,y:number)
@@ -41,10 +41,10 @@ export class GraphicPage {
      
      this._CONTEXT.beginPath();
      this._CONTEXT.moveTo(x ,0);
-     this._CONTEXT.lineTo(x,this.platform.height()  );
+     this._CONTEXT.lineTo(x,300  );
      this._CONTEXT.stroke();
      this._CONTEXT.moveTo(0 ,y);
-     this._CONTEXT.lineTo(this.platform.width(), y );
+     this._CONTEXT.lineTo(300, y );
      this._CONTEXT.stroke();
   }
 
@@ -53,10 +53,22 @@ export class GraphicPage {
   {
     
      this._CONTEXT.beginPath();
-     this._CONTEXT.rect(0 ,0, this._CANVAS.width, this._CANVAS.height);
+     this._CONTEXT.rect(0 ,0, 300, 300);
      this._CONTEXT.lineWidth = 1;
     // this._CONTEXT.strokeStyle = '#ffffff';
      this._CONTEXT.stroke();
+  }
+
+
+  drawText()
+  {
+    
+    this._CONTEXT.font="10px Georgia";
+    this._CONTEXT.fillStyle = 'black';
+    this._CONTEXT.fillText("ARENA",0,10);
+    this._CONTEXT.fillText("MANCHA CEGA",200,10);
+    this._CONTEXT.fillText("FACHADA",0,298);
+    this._CONTEXT.fillText("DESCONHECIDA",200,298);
   }
 
   clearCanvas()
@@ -68,13 +80,14 @@ export class GraphicPage {
 
   ionViewDidLoad() {
     this._CANVAS 		    = this.canvasEl.nativeElement;
-      this._CANVAS.width  	= this.platform.width();
-      this._CANVAS.height 	= this.platform.height();
+      this._CANVAS.width  	= this.platform.width()-30;
+      this._CANVAS.height 	= this.platform.height()-280;
 
       this.initialiseCanvas();
      // this.clearCanvas();
       this.drawSquare();
       this.drawLine(100,100);
+      this.drawText();
   }
 
 }
