@@ -15,16 +15,23 @@ interface SubQuest {
   templateUrl: 'survey.html',
 })
 export class SurveyPage {
-  quests: Quest[] = []
+  quests: Quest[] = [];
+  valor :number;
+
   constructor(public navCtrl: NavController, public questSrv: QuestsService) {
 
 
+  }
+
+  customTrackBy(index: number, obj: any): any {
+    return index;
   }
 
   ionViewDidLoad() {
     //this.quests = { ... this.questSrv.quests}; 
     let quest: Quest;
     let subquest = {} as SubQuest;
+
     for (let key in this.questSrv.quests) {
       quest = new Quest('', []);
      

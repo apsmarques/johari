@@ -13,23 +13,27 @@
 </ion-header>
 
 <ion-content padding>
+  
   <ion-card *ngFor="let quest of quests; let i = index">
     <ion-card-header text-wrap>
       #{{ i + 1 }}
       {{ quest.Titulo }}      
     </ion-card-header> 
     <ion-card-content>
-        <ion-row *ngFor="let sub of quest.subQuest; let j= index">
+      <ion-grid>
+        <ion-row *ngFor="let sub of quest.subQuest; let j= index;trackBy: customTrackBy">
             {{ sub.Titulo }}
             <hr>
             <ion-col>
-            <ion-range min="0" max="5" step="1"  [(ngModel)]="sub.Valor">
+            <ion-range min="0" max="5" step="1" pin="true" >
                <ion-label range-left>0</ion-label>
-              <ion-label range-right>{{ sub.valor}}</ion-label>
+              <ion-label range-right>{{ quests[i].subQuest[j].Valor }}</ion-label>
             </ion-range>
             </ion-col>
         </ion-row>
+      </ion-grid>
     </ion-card-content> 
     
   </ion-card>
+  <button ion-button block >Gerar gráfico</button>
 </ion-content>
