@@ -8,7 +8,7 @@ import { Injectable } from "@angular/core";
 
 @Injectable()
 export class QuestsService {
-  private quests: Quest[] = [] ;
+  public quests: Quest[] = [] ;
 
   constructor(private http: Http, private authService: AuthService) {
   }
@@ -20,7 +20,7 @@ export class QuestsService {
     return this.http
       .get('https://johar-cee37.firebaseio.com/Questionario.json?auth=' + token)
       .map((response: Response) => {
-        return response.json();
+        this.quests = {... response.json()};
       });
   }
 

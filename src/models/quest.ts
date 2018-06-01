@@ -1,6 +1,6 @@
 interface SubQuest {
     Titulo: string;
-    valor:number;
+    Valor:number;
 }
 
 export class Quest {

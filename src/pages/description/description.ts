@@ -24,7 +24,7 @@ export class DescriptionPage {
                   .then(
                     (token: string) => {
                       this.questSrv.getDados(token)
-                        .subscribe(data=>console.log(data));                        
+                        .subscribe(data=>console.log('passou'));                        
                     })
   }
 
