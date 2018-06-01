@@ -3,6 +3,7 @@ import { IonicPage, NavController } from 'ionic-angular';
 import { Quest } from '../../models/quest';
 
 import { QuestsService } from '../../services/quests';
+import { GraphicPage } from '../graphic/graphic';
 
 interface SubQuest {
   Titulo: string;
@@ -16,7 +17,7 @@ interface SubQuest {
 })
 export class SurveyPage {
   quests: Quest[] = [];
-  valor :number;
+
 
   constructor(public navCtrl: NavController, public questSrv: QuestsService) {
 
@@ -25,6 +26,10 @@ export class SurveyPage {
 
   customTrackBy(index: number, obj: any): any {
     return index;
+  }
+
+  drawGraphic(){
+    this.navCtrl.push(GraphicPage);
   }
 
   ionViewDidLoad() {

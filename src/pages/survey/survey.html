@@ -24,8 +24,8 @@
         <ion-row *ngFor="let sub of quest.subQuest; let j= index;trackBy: customTrackBy">
             {{ sub.Titulo }}
             <hr>
-            <ion-col>
-            <ion-range min="0" max="5" step="1" pin="true" >
+            <ion-col >
+            <ion-range align="left" min="0" max="5" step="1" pin="true" >
                <ion-label range-left>0</ion-label>
               <ion-label range-right>{{ quests[i].subQuest[j].Valor }}</ion-label>
             </ion-range>
@@ -35,5 +35,5 @@
     </ion-card-content> 
     
   </ion-card>
-  <button ion-button block >Gerar gráfico</button>
+  <button ion-button block  (click)="drawGraphic()">Gerar gráfico</button>
 </ion-content>
