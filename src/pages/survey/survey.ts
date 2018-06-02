@@ -5,10 +5,6 @@ import { Quest } from '../../models/quest';
 import { QuestsService } from '../../services/quests';
 import { GraphicPage } from '../graphic/graphic';
 
-interface SubQuest {
-  Titulo: string;
-  Valor:number;
-}
 
 @IonicPage()
 @Component({
@@ -17,7 +13,7 @@ interface SubQuest {
 })
 export class SurveyPage {
   quests: Quest[] = [];
-
+  
 
   constructor(public navCtrl: NavController, public questSrv: QuestsService) {
 
@@ -39,12 +35,12 @@ export class SurveyPage {
   ionViewDidLoad() {
     //this.quests = { ... this.questSrv.quests}; 
     let quest: Quest;
-    
+     
 
     for (let key in this.questSrv.quests) {
       quest = new Quest('', []);
-     let subquest = {} as SubQuest; 
-      //key = Pergunta
+      
+      //key == Pergunta
       for (let key2 in this.questSrv.quests[key]) {
         if (key2 == "Titulo") {
           quest.Titulo = this.questSrv.quests[key][key2];
@@ -52,9 +48,9 @@ export class SurveyPage {
           for (let key3 in this.questSrv.quests[key][key2]) {
             for (let key4 in this.questSrv.quests[key][key2][key3]) {
               if (key4 == "Titulo") {
-                subquest.Titulo = this.questSrv.quests[key][key2][key3][key4];      
-                subquest.Valor = 0;         
-                quest.subQuest.push(subquest);
+                let subq = {Titulo:this.questSrv.quests[key][key2][key3][key4],Valor:0};
+                    
+                quest.subQuest.push(subq);
               } 
               
             }
@@ -65,7 +61,7 @@ export class SurveyPage {
       this.quests.push(quest);
 
     }
-    
+   
   }
 
 }
