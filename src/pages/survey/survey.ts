@@ -33,7 +33,7 @@ export class SurveyPage {
   }
 
   change(i:number,j:number){
-     console.log("Valor:"+this.quests[i].subQuest[j].Valor)ç
+     console.log("Valor:"+this.quests[i].subQuest[j].Valor);
   }
 
   ionViewDidLoad() {
