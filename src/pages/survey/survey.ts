@@ -32,14 +32,18 @@ export class SurveyPage {
     this.navCtrl.push(GraphicPage);
   }
 
+  change(i:number,j:number){
+     console.log("Valor:"+this.quests[i].subQuest[j].Valor)ç
+  }
+
   ionViewDidLoad() {
     //this.quests = { ... this.questSrv.quests}; 
     let quest: Quest;
-    let subquest = {} as SubQuest;
+    
 
     for (let key in this.questSrv.quests) {
       quest = new Quest('', []);
-     
+     let subquest = {} as SubQuest; 
       //key = Pergunta
       for (let key2 in this.questSrv.quests[key]) {
         if (key2 == "Titulo") {

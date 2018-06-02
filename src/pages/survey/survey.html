@@ -21,13 +21,13 @@
     </ion-card-header> 
     <ion-card-content>
       <ion-grid>
-        <ion-row *ngFor="let sub of quest.subQuest; let j= index;trackBy: customTrackBy">
-            {{ sub.Titulo }}
+        <ion-row *ngFor="let subs of quest.subQuest; let j= index;trackBy: customTrackBy">
+            {{ subs.Titulo }}
             <hr>
-            <ion-col >
-            <ion-range align="left" min="0" max="5" step="1" pin="true" >
+            <ion-col  >
+            <ion-range class = "item range range-calm"   align="left" min="0" max="5" step="1" pin="true" [(ngModel)]= "quests[i].subQuest[j].Valor" >
                <ion-label range-left>0</ion-label>
-              <ion-label range-right>{{ quests[i].subQuest[j].Valor }}</ion-label>
+              <ion-label range-right>5</ion-label>
             </ion-range>
             </ion-col>
         </ion-row>
