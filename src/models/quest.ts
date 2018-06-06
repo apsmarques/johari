@@ -4,5 +4,5 @@ interface SubQuest {
 }
 
 export class Quest {
-  constructor(public Titulo: string, public subQuest: SubQuest[]) {}
+  constructor(public id:number,public Titulo: string, public subQuest: SubQuest[]) {}
 }

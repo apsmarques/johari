@@ -1,5 +1,4 @@
 import { Http, Response } from "@angular/http";
-import { AuthService } from "../services/auth";
 import { Quest } from "../models/quest";
 import 'rxjs/add/operator/map';
 import 'rxjs/Rx';
@@ -10,15 +9,15 @@ import { Injectable } from "@angular/core";
 export class QuestsService {
   public quests: Quest[] = [] ;
 
-  constructor(private http: Http, private authService: AuthService) {
+  constructor(private http: Http) {
   }
 
   
   getDados(token: string) {
-    const userId = this.authService.getActiveUser().uid;
+    
     
     return this.http
-      .get('https://johar-cee37.firebaseio.com/Questionario.json?auth=' + token)
+      .get('https://johari-8ab7d.firebaseio.com/Questionario.json?auth=' + token)
       .map((response: Response) => {
         this.quests = {... response.json()};
       });

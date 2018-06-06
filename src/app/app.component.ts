@@ -28,12 +28,13 @@ export class MyApp {
   constructor(private platform: Platform,              
               private authService: AuthService) {
     firebase.initializeApp({ 
-        apiKey: "AIzaSyA64Rp7oJLe3okXnFS7fvPDgZvm1CDkot0",
-        authDomain: "johar-cee37.firebaseapp.com",
-        databaseURL: "https://johar-cee37.firebaseio.com",
-        projectId: "johar-cee37",
-        storageBucket: "johar-cee37.appspot.com",
-        messagingSenderId: "275707525262"
+       apiKey: "AIzaSyCRUAHel2XzAIbYTF7CSETCXq2JG9Z4opM",
+        authDomain: "johari-8ab7d.firebaseapp.com",
+        databaseURL: "https://johari-8ab7d.firebaseio.com",
+        projectId: "johari-8ab7d",
+        storageBucket: "johari-8ab7d.appspot.com",
+        messagingSenderId: "660190677288"
+
       })
 
     firebase.auth().onAuthStateChanged(user => {

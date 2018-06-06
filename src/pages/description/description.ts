@@ -20,11 +20,11 @@ export class DescriptionPage {
   
 
   constructor(public navCtrl: NavController,public questSrv:QuestsService,private authService: AuthService) {
-    this.authService.getActiveUser().getToken()
+    this.authService.getActiveUser().getIdToken()
                   .then(
                     (token: string) => {
                       this.questSrv.getDados(token)
-                        .subscribe(data=>console.log('passou'));                        
+                        .subscribe(data=>console.log(token));                        
                     })
   }
 

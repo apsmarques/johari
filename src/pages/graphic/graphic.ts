@@ -17,8 +17,15 @@ export class GraphicPage {
   @ViewChild('canvas') canvasEl : ElementRef;
   private _CANVAS  : any;
   private _CONTEXT : any;
+  xVlr : number;
+  yVlr : number;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public platform:Platform) {
+   
+    this.xVlr = this.navParams.get('x');
+    this.yVlr = this.navParams.get('y');
+    console.log('vlrx: '+this.xVlr);
+    console.log('vlry: '+this.yVlr);
   }
 
   initialiseCanvas()
@@ -36,15 +43,15 @@ export class GraphicPage {
      this._CONTEXT.fillRect(0, 0, this._CANVAS.width, this._CANVAS.height);
   }
 
-  drawLine(x:number,y:number)
+  drawLine()
   {
      
      this._CONTEXT.beginPath();
-     this._CONTEXT.moveTo(x ,0);
-     this._CONTEXT.lineTo(x,300  );
+     this._CONTEXT.moveTo(this.xVlr ,0);
+     this._CONTEXT.lineTo(this.xVlr,300  );
      this._CONTEXT.stroke();
-     this._CONTEXT.moveTo(0 ,y);
-     this._CONTEXT.lineTo(300, y );
+     this._CONTEXT.moveTo(0 ,this.yVlr);
+     this._CONTEXT.lineTo(300, this.yVlr );
      this._CONTEXT.stroke();
   }
 
@@ -79,6 +86,7 @@ export class GraphicPage {
 
 
   ionViewDidLoad() {
+    console.log("didload");
     this._CANVAS 		    = this.canvasEl.nativeElement;
       this._CANVAS.width  	= this.platform.width()-30;
       this._CANVAS.height 	= this.platform.height()-280;
@@ -86,7 +94,7 @@ export class GraphicPage {
       this.initialiseCanvas();
      // this.clearCanvas();
       this.drawSquare();
-      this.drawLine(100,100);
+      this.drawLine();
       this.drawText();
   }
 

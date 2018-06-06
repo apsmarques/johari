@@ -22,7 +22,7 @@ export class UserService {
     const userId = this.authService.getActiveUser().uid;
     
     return this.http
-      .put('https://johar-cee37.firebaseio.com/' + userId + '/userInfo.json?auth=' + token, this.user)
+      .put('https://johari-8ab7d.firebaseio.com/' + userId + '/userInfo.json?auth=' + token, this.user)
       .map((response: Response) => {
         return response.json();
       });
